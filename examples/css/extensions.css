@@ -40,7 +40,7 @@ div, span, p, td {
 }
 #side_panel {
 	padding: 0 20px 20px 0;
-	width: 240px;
+	width: 130px;
 	display: inline-block;
 	vertical-align: top;
 }
@@ -132,7 +132,7 @@ label.disabled {
 #offset_form {
 	vertical-align: top;
 	display: inline-block;
-	width: 45%;
+	width: 100%;
 }
 #interpolation_form label,
 #offset_form label {
