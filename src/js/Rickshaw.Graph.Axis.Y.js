@@ -65,12 +65,18 @@ Rickshaw.Graph.Axis.Y = function(args) {
 
 		if (this.graph.height !== this._renderHeight) this.setSize({ auto: true });
 
-		var axis = d3.svg.axis().scale(this.graph.y).orient(this.orientation);
+		var scale = this.graph.y1
+		if (this.orientation=='right')
+			scale = this.graph.y2
+
+		var axis = d3.svg.axis().scale(scale).orient(this.orientation);
+
 		axis.tickFormat( args.tickFormat || function(y) { return y } );
 
+		var transform = ""
 		if (this.orientation == 'left') {
-			var berth = this.height * berthRate;
-			var transform = 'translate(' + this.width + ', ' + berth + ')';
+			var berth = this.graph.height * berthRate;			
+			transform = 'translate(' + this.graph.width + ', 0)';
 		}
 
 		if (this.element) {
@@ -82,7 +88,6 @@ Rickshaw.Graph.Axis.Y = function(args) {
 			.attr("class", ["y_ticks", this.ticksTreatment].join(" "))
 			.attr("transform", transform)
 			.call(axis.ticks(this.ticks).tickSubdivide(0).tickSize(this.tickSize))
-
 		var gridSize = (this.orientation == 'right' ? 1 : -1) * this.graph.width;
 
 		this.graph.vis

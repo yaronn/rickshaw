@@ -96,14 +96,22 @@ Rickshaw.Graph = function(args) {
 
 	this.discoverRange = function() {
 
-		var domain = this.renderer.domain();
+		var domain1 = this.renderer.domain("left");
+		
+		this.x = d3.scale.linear().domain(domain1.x).range([0, this.width]);
 
-		this.x = d3.scale.linear().domain(domain.x).range([0, this.width]);
+		this.y1 = d3.scale.linear().domain(domain1.y).range([this.height, 0]);
 
-		this.y = d3.scale.linear().domain(domain.y).range([this.height, 0]);
+		this.y1.magnitude = d3.scale.linear()
+			.domain([domain1.y[0] - domain1.y[0], domain1.y[1] - domain1.y[0]])
+			.range([0, this.height]);
 
-		this.y.magnitude = d3.scale.linear()
-			.domain([domain.y[0] - domain.y[0], domain.y[1] - domain.y[0]])
+		var domain2 = this.renderer.domain("right");
+		
+		this.y2 = d3.scale.linear().domain(domain2.y).range([this.height, 0]);
+
+		this.y2.magnitude = d3.scale.linear()
+			.domain([domain2.y[0] - domain2.y[0], domain2.y[1] - domain2.y[0]])
 			.range([0, this.height]);
 	};
 

@@ -52,6 +52,7 @@ Rickshaw.Graph.HoverDetail = Rickshaw.Class.create({
 		var points = [];
 		var nearestPoint;
 
+		var orientation = "left"
 		this.graph.series.active().forEach( function(series) {
 
 			var data = this.graph.stackedData[j++];
@@ -75,9 +76,10 @@ Rickshaw.Graph.HoverDetail = Rickshaw.Class.create({
 
 			var value = data[dataIndex];
 
+			var y = orientation=="left"?graph.y1:graph.y2;
 			var distance = Math.sqrt(
 				Math.pow(Math.abs(graph.x(value.x) - eventX), 2) +
-				Math.pow(Math.abs(graph.y(value.y + value.y0) - eventY), 2)
+				Math.pow(Math.abs(y(value.y + value.y0) - eventY), 2)
 			);
 
 			var xFormatter = series.xFormatter || this.xFormatter;
@@ -97,7 +99,10 @@ Rickshaw.Graph.HoverDetail = Rickshaw.Class.create({
 				nearestPoint = point;
 			}
 
+			point.orientation = orientation
 			points.push(point);
+
+			orientation = "right"
 
 		}, this );
 
@@ -162,7 +167,8 @@ Rickshaw.Graph.HoverDetail = Rickshaw.Class.create({
 
 		item.className = 'item';
 		item.innerHTML = this.formatter(point.series, point.value.x, point.value.y, formattedXValue, formattedYValue, point);
-		item.style.top = this.graph.y(point.value.y0 + point.value.y) + 'px';
+		var y = point.orientation=="left"?this.graph.y1:this.graph.y2;
+		item.style.top = y(point.value.y0 + point.value.y) + 'px';
 
 		this.element.appendChild(item);
 

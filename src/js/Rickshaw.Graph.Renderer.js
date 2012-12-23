@@ -1,5 +1,5 @@
 Rickshaw.namespace("Rickshaw.Graph.Renderer");
-
+var x
 Rickshaw.Graph.Renderer = Rickshaw.Class.create( {
 
 	initialize: function(args) {
@@ -28,12 +28,12 @@ Rickshaw.Graph.Renderer = Rickshaw.Class.create( {
 		};
 	},
 
-	domain: function() {
-
+	domain: function(side) {
+		var idx = side=="left"?0:1;
 		var values = { xMin: [], xMax: [], y: [] };
 
 		var stackedData = this.graph.stackedData || this.graph.stackData();
-		var firstPoint = stackedData[0][0];
+		var firstPoint = stackedData[idx][0];
 
 		var xMin = firstPoint.x;
 		var xMax = firstPoint.x
@@ -41,7 +41,7 @@ Rickshaw.Graph.Renderer = Rickshaw.Class.create( {
 		var yMin = firstPoint.y + firstPoint.y0;
 		var yMax = firstPoint.y + firstPoint.y0;
 
-		stackedData.forEach( function(series) {
+		var series = stackedData[idx]
 
 			series.forEach( function(d) {
 
@@ -53,7 +53,7 @@ Rickshaw.Graph.Renderer = Rickshaw.Class.create( {
 
 			if (series[0].x < xMin) xMin = series[0].x;
 			if (series[series.length - 1].x > xMax) xMax = series[series.length - 1].x;
-		} );
+		
 
 		xMin -= (xMax - xMin) * this.padding.left;
 		xMax += (xMax - xMin) * this.padding.right;
@@ -69,26 +69,28 @@ Rickshaw.Graph.Renderer = Rickshaw.Class.create( {
 			yMax += (yMax - yMin) * this.padding.top;
 		}
 
-		return { x: [xMin, xMax], y: [yMin, yMax] };
+		return { x: [xMin, xMax], y: [yMin, yMax]};
 	},
 
 	render: function() {
 
 		var graph = this.graph;
-
+		x = graph
 		graph.vis.selectAll('*').remove();
 
+		var self = this
 		var nodes = graph.vis.selectAll("path")
 			.data(this.graph.stackedData)
 			.enter().append("svg:path")
-			.attr("d", this.seriesPathFactory());
+			.attr("d", function(d, i) {return self.seriesPathFactory(i==0?"left":"right")(d, i)});
 
 		var i = 0;
 		graph.series.forEach( function(series) {
-			if (series.disabled) return;
+			if (series.disabled) return;			
 			series.path = nodes[0][i++];
 			this._styleSeries(series);
 		}, this );
+		
 	},
 
 	_styleSeries: function(series) {

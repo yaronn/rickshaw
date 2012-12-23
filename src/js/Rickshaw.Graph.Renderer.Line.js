@@ -13,13 +13,14 @@ Rickshaw.Graph.Renderer.Line = Rickshaw.Class.create( Rickshaw.Graph.Renderer, {
 		} );
 	},
 
-	seriesPathFactory: function() {
-
+	seriesPathFactory: function(orientation) {
+		
 		var graph = this.graph;
 
+		var y = orientation=='left'?graph.y1:graph.y2;
 		var factory = d3.svg.line()
 			.x( function(d) { return graph.x(d.x) } )
-			.y( function(d) { return graph.y(d.y) } )
+			.y( function(d) { return y(d.y) } )
 			.interpolate(this.graph.interpolation).tension(this.tension)
 
 		factory.defined && factory.defined( function(d) { return d.y !== null } );

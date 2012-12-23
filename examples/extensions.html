@@ -48,11 +48,11 @@
 		<section><div id="legend"></div></section>
 		<section>
 			<div id="renderer_form" class="toggler">
-				<input type="radio" name="renderer" id="area" value="area" checked>
+				<input type="radio" name="renderer" id="area" value="area">
 				<label for="area">area</label>
 				<input type="radio" name="renderer" id="bar" value="bar">
 				<label for="bar">bar</label>
-				<input type="radio" name="renderer" id="line" value="line">
+				<input type="radio" name="renderer" id="line" value="line" checked>
 				<label for="line">line</label>
 				<input type="radio" name="renderer" id="scatter" value="scatterplot">
 				<label for="scatter">scatter</label>
@@ -122,41 +122,23 @@ var palette = new Rickshaw.Color.Palette( { scheme: 'classic9' } );
 
 // instantiate our graph!
 
+seriesData[1].forEach (function(d) {d.y+=200}) 
+
 var graph = new Rickshaw.Graph( {
 	element: document.getElementById("chart"),
 	width: 900,
 	height: 500,
-	renderer: 'area',
+	renderer: 'line',
 	stroke: true,
 	series: [
 		{
-			color: palette.color(),
-			data: seriesData[0],
-			name: 'Moscow'
-		}, {
-			color: palette.color(),
+			color: function(){return palette.color()}(),
 			data: seriesData[1],
-			name: 'Shanghai'
-		}, {
-			color: palette.color(),
-			data: seriesData[2],
-			name: 'Amsterdam'
-		}, {
-			color: palette.color(),
-			data: seriesData[3],
 			name: 'Paris'
-		}, {
-			color: palette.color(),
-			data: seriesData[4],
-			name: 'Tokyo'
-		}, {
-			color: palette.color(),
+		}, {		
+			color: function(){palette.color(); palette.color(); palette.color(); return palette.color()}(),
 			data: seriesData[5],
 			name: 'London'
-		}, {
-			color: palette.color(),
-			data: seriesData[6],
-			name: 'New York'
 		}
 	]
 } );
@@ -213,12 +195,24 @@ var xAxis = new Rickshaw.Graph.Axis.Time( {
 xAxis.render();
 
 var yAxis = new Rickshaw.Graph.Axis.Y( {
+	orientation: 'right',
 	graph: graph,
 	tickFormat: Rickshaw.Fixtures.Number.formatKMBT,
 	ticksTreatment: ticksTreatment
 } );
 
 yAxis.render();
+
+
+var yAxis1 = new Rickshaw.Graph.Axis.Y( {
+	orientation: 'left',
+	graph: graph,
+	tickFormat: Rickshaw.Fixtures.Number.formatKMBT,
+	ticksTreatment: ticksTreatment
+} );
+
+yAxis1.render();
+
 
 
 var controls = new RenderControls( {
@@ -239,11 +233,14 @@ var messages = [
 	"Added documentation for new methods"
 ];
 
+
 setInterval( function() {
 	random.addData(seriesData);
 	graph.update();
 
 }, 3000 );
+
+
 
 function addAnnotation(force) {
 	if (messages.length > 0 && (force || Math.random() >= 0.95)) {
