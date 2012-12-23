@@ -61,38 +61,38 @@
 
 	<form id="side_panel" style="margin-left: 30px;">
 		
-		<h1 style="margin-bottom: 5px; color: orange">Metric1</h1>
-		<span style="font-size: small;">bla bla bla bla bla bla bla bla bla bla bla bla  bla bla </span>
+		<h1 id="metric1name" style="margin-bottom: 5px; color: orange">Metric1</h1>
+		<span style="font-size: small;" id="metric1desc">this is the description for metric1</span>
 		
 		<section style="margin-top: 15px;">
 			<div id="offset_form">
-				<label for="stack">
-					<input type="radio" name="metric" id="stack" value="zero" checked>
-					<span>stack</span>
+				<label for="metric1">
+					<input type="radio" name="left" id="left" value="metric1" checked>
+					<span>metric1</span>
 				</label>
-				<label for="stream">
-					<input type="radio" name="metric" id="stream" value="wiggle">
-					<span>stream</span>
+				<label for="metric2">
+					<input type="radio" name="left" id="left" value="metric2">
+					<span>metric2</span>
 				</label>
-				<label for="pct">
-					<input type="radio" name="metric" id="pct" value="expand">
-					<span>pct</span>
+				<label for="metric3">
+					<input type="radio" name="left" id="left" value="metric3">
+					<span>metric3</span>
 				</label>
-				<label for="value">
-					<input type="radio" name="metric" id="value" value="value">
-					<span>value</span>
+				<label for="metric4">
+					<input type="radio" name="left" id="left" value="metric4">
+					<span>metric4</span>
 				</label>			
-				<label for="cardinal">
-					<input type="radio" name="metric" id="cardinal" value="cardinal" checked>
-					<span>cardinal</span>
+				<label for="metric5">
+					<input type="radio" name="left" id="left" value="metric5">
+					<span>metric5</span>
 				</label>
-				<label for="linear">
-					<input type="radio" name="metric" id="linear" value="linear">
-					<span>linear</span>
+				<label for="metric6">
+					<input type="radio" name="left" id="left" value="metric6">
+					<span>metric6</span>
 				</label>
-				<label for="step">
-					<input type="radio" name="metric" id="step" value="step-after">
-					<span>step</span>
+				<label for="metric7">
+					<input type="radio" name="left" id="left" value="metric7">
+					<span>metric7</span>
 				</label>
 			</div>
 		</section>
@@ -104,43 +104,51 @@
 		<div id="chart"></div>
 		<div id="timeline"></div>
 		<div id="slider"></div>
+		<div id="times" align="right" style="margin-top: 13px;">
+			Zoom: 
+			<a id="time1" href="bla">1 year</a>			
+			<a id="time2" href="bla">1 month</a>			
+			<a id="time3" href="bla">1 week</a>
+			<a id="time4" href="bla">1 day</a>
+			<a id="time5" href="bla" style="color: #5A75C4;">1 hour</a>
+		</div>
 	</div>
 
 
 	<form id="side_panel" style="margin-left: 30px;">
 		
-		<h1 style="margin-bottom: 5px; color: blue">Metric2</h1>
-		<span style="font-size: small;">bla bla bla bla bla bla bla bla bla bla bla bla  bla bla </span>
+		<h1 id="metric2name" style="margin-bottom: 5px; color: blue">Metric1</h1>
+		<span style="font-size: small;" id="metric2desc">this is the description for metric2</span>
 		
 		<section style="margin-top: 15px;">
 			<div id="offset_form">
-				<label for="stack">
-					<input type="radio" name="metric" id="stack" value="zero" checked>
-					<span>stack</span>
+				<label for="metric1">
+					<input type="radio" name="right" id="right" value="metric1" c>
+					<span>metric1</span>
 				</label>
-				<label for="stream">
-					<input type="radio" name="metric" id="stream" value="wiggle">
-					<span>stream</span>
+				<label for="metric2">
+					<input type="radio" name="right" id="right" value="metric2"checked>
+					<span>metric2</span>
 				</label>
-				<label for="pct">
-					<input type="radio" name="metric" id="pct" value="expand">
-					<span>pct</span>
+				<label for="metric3">
+					<input type="radio" name="right" id="right" value="metric3">
+					<span>metric3</span>
 				</label>
-				<label for="value">
-					<input type="radio" name="metric" id="value" value="value">
-					<span>value</span>
+				<label for="metric4">
+					<input type="radio" name="right" id="right" value="metric4">
+					<span>metric4</span>
 				</label>			
-				<label for="cardinal">
-					<input type="radio" name="metric" id="cardinal" value="cardinal" checked>
-					<span>cardinal</span>
+				<label for="metric5">
+					<input type="radio" name="right" id="right" value="metric5">
+					<span>metric5</span>
 				</label>
-				<label for="linear">
-					<input type="radio" name="metric" id="linear" value="linear">
-					<span>linear</span>
+				<label for="metric6">
+					<input type="radio" name="right" id="right" value="metric6">
+					<span>metric6</span>
 				</label>
-				<label for="step">
-					<input type="radio" name="metric" id="step" value="step-after">
-					<span>step</span>
+				<label for="metric7">
+					<input type="radio" name="right" id="right" value="metric7">
+					<span>metric7</span>
 				</label>
 			</div>
 		</section>
@@ -156,10 +164,13 @@
 
 // set up our data series with 50 random data points
 
-var seriesData = [ [], [] ];
-var random = new Rickshaw.Fixtures.RandomData(150);
+var COUNT = 150
+var INTERVAL = 150
 
-for (var i = 0; i < 150; i++) {
+var seriesData = [ [], [] ];
+var random = new Rickshaw.Fixtures.RandomData(INTERVAL);
+
+for (var i = 0; i < COUNT; i++) {
 	random.addData(seriesData);
 }
 
@@ -180,11 +191,11 @@ var graph = new Rickshaw.Graph( {
 		{
 			color: "orange",//function(){return palette.color()}(),
 			data: seriesData[0],
-			name: 'Paris'
+			name: 'Metric1'
 		}, {		
 			color: "blue",//function(){palette.color(); palette.color(); palette.color(); return palette.color()}(),
 			data: seriesData[1],
-			name: 'London'
+			name: 'Metric2'
 		}
 	]
 } );
@@ -236,10 +247,6 @@ yAxis1.render();
 
 
 
-var controls = new RenderControls( {
-	element: document.querySelector('form'),
-	graph: graph
-} );
 
 // add some data every so often
 
@@ -264,28 +271,63 @@ setInterval( function() {
 */
 
 
-function addAnnotation(force) {
-	if (messages.length > 0 && (force || Math.random() >= 0.95)) {
-		annotator.add(seriesData[0][seriesData[0].length-1].x, messages.shift());
+function addAnnotation(force) {	
+	var rnd = Math.round(Math.random()*105)	
+	if (messages.length > 0 && (force || Math.random() >= 0.05)) {
+		annotator.add(seriesData[0][seriesData[0].length-rnd].x, messages.shift());
+		//graph.update();
 	}
 }
 
-addAnnotation(true);
-setTimeout( function() { setInterval( addAnnotation, 6000 ) }, 6000 );
+for (var i = 0; i< 6; i++)
+	addAnnotation(true);
+graph.update();
+//setTimeout( function() { setInterval( addAnnotation, 1000 ) }, 1000 );
 
 
-function foo() {
-	//seriesData = [ [], [], [], [], [], [], [], [], [] ];	
-
-	for (var i = 0; i < 150; i++) {
+function replaceAllData() {
+	for (var i = 0; i < COUNT; i++) {
 		seriesData[0].shift();
 		seriesData[1].shift();
-		random.addData(seriesData);	
+		
 	}
+
+	for (var i = 0; i < COUNT; i++) {
+		random.addData(seriesData);			
+	}	
 
 	graph.update();
 
 }
+
+
+$('input[name=left]').change(function() {changeGraph()})
+$('input[name=right]').change(function() {changeGraph()})
+
+$("#times a").click(function(e) {
+
+	random.timeInterval += 100;	
+	$("#times a").css("color", "blue");
+	$(e.currentTarget).css("color", "#5A75C4")
+
+	replaceAllData()
+
+	return false;
+})
+
+function changeGraph() {
+		var left = $('input[name=left]:checked').val()
+		var right = $('input[name=right]:checked').val()
+
+		var desc = "this is the description for "
+		$("#metric1name").text(left)
+		$("#metric2name").text(right)
+		$("#metric1desc").text(desc + left)
+		$("#metric2desc").text(desc + right)
+
+		replaceAllData()
+}
+
 </script>
 
 </body>

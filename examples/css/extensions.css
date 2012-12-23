@@ -161,24 +161,24 @@ label[for=scatter] {
 #interpolation_form label span {
 	padding-left: 36px;
 }
-label[for=stack] {
+label[for=metric1] {
 	background-image: url(../images/offset_stack.png);
 }
-label[for=pct] {
+label[for=metric2] {
 	background-image: url(../images/offset_pct.png);
 }
-label[for=stream] {
+label[for=metric3] {
 	background-image: url(../images/offset_stream.png);
 }
-label[for=value] {
+label[for=metric4] {
 	background-image: url(../images/offset_value.png);
 }
-label[for=cardinal] {
+label[for=metric5] {
 	background-image: url(../images/interp_cardinal.png);
 }
-label[for=linear] {
+label[for=metric6] {
 	background-image: url(../images/interp_linear.png);
 }
-label[for=step] {
+label[for=metric7] {
 	background-image: url(../images/interp_step.png);
 }

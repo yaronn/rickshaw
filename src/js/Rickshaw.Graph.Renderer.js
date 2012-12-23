@@ -1,5 +1,5 @@
 Rickshaw.namespace("Rickshaw.Graph.Renderer");
-var x
+
 Rickshaw.Graph.Renderer = Rickshaw.Class.create( {
 
 	initialize: function(args) {
@@ -75,7 +75,7 @@ Rickshaw.Graph.Renderer = Rickshaw.Class.create( {
 	render: function() {
 
 		var graph = this.graph;
-		x = graph
+		
 		graph.vis.selectAll('*').remove();
 
 		var self = this

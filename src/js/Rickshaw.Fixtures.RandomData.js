@@ -2,8 +2,10 @@ Rickshaw.namespace('Rickshaw.Fixtures.RandomData');
 
 Rickshaw.Fixtures.RandomData = function(timeInterval) {
 
+	var self = this
+
 	var addData;
-	timeInterval = timeInterval || 1;
+	this.timeInterval = timeInterval || 1;
 
 	var lastRandomValue = 200;
 
@@ -24,7 +26,7 @@ Rickshaw.Fixtures.RandomData = function(timeInterval) {
 				+ (Math.cos(index / 7) + 2) * 7
 				+ (Math.cos(index / 17) + 2) * 1;
 		
-			series.push( { x: (index * timeInterval) + timeBase, y: v + randomVariance } );
+			series.push( { x: (index * self.timeInterval) + timeBase, y: v + randomVariance } );
 		} );
 
 		lastRandomValue = randomValue * .85;
